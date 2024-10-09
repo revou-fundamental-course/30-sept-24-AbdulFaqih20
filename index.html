@@ -1,12 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document faqih</title>
-    <link rel="stylesheet" href="style.csss">
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Konversi Suhu</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 26px;
+        color: #333;
+      }
+
+      main {
+        margin-bottom: 20px;
+      }
+
+      .container-form {
+        background-color: #eafbff;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      label {
+        font-size: 18px;
+        color: #333;
+      }
+
+      input {
+        padding: 10px;
+        margin: 10px 0;
+        width: 100%;
+        max-width: 300px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .container-hasil {
+        background-color: #f8cbc0;
+        padding: 16px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        box-sizing: border-box;
+        box-shadow: 0 4px 12px rgba(2, 4, 6, 0.4);
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        justify-content: center;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      #result,
+      #calculation {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #151111;
+        max-height: 3px;
+      }
+
+      section h2 {
+        font-size: 22px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      article p {
+        margin: 10px 0;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #777;
+      }
+
+      footer p {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Kalkulator Konversi Suhu</h1>
+      </header>
+
+      <main>
+        <!-- form content -->
+        <section class="container-form">
+          <!-- intruksi -->
+          <article>
+            <p>
+              Masukan suhu dalam derajat Celsius dan klik "Konversi" untuk
+              mendapatkan suhu dalam Fahrenheit.
+            </p>
+          </article>
+
+          <!-- inputan -->
+          <form id="suhuForm">
+            <label for="celcius"> Celsius: </label>
+            <input
+              type="number"
+              id="celcius"
+              placeholder="Masukkan suhu"
+              required
+            />
+          </form>
+          <div>
+            <button type="button" onclick="convert()">Konversi</button>
+            <button type="button" onclick="resetToZero()">Reset</button>
+            <button type="button" onclick="reverse()">Reverse</button>
+          </div>
+        </section>
+        <!-- hasil inputan -->
+        <section class="container-hasil">
+          <label for="celcius"> Fahrenheit: </label>
+          <div id="result"></div>
+          <div id="calculation"></div>
+        </section>
+        <!-- cara kalkulasi -->
+        <div id="calculation"></div>
+
+        <!-- info content -->
+        <section>
+          <header>
+            <h2>Cara Konversi Celsius ke Fahrenheit</h2>
+          </header>
+
+          <article>
+            <p>
+              Konversi dari Celsius ke Fahrenheit menggunakan rumus berikut:
+            </p>
+            <p>
+              Suhu dalam derajat fahrenheit (&deg;F) sama dengan suhu dalam
+              derajat celcius (&deg;C) kali 9/5 + 32
+            </p>
+            <p>F = (C × 9/5) + 32</p>
+            <h3>atau</h3>
+            <p>F = (C &times; 1.8) + 32</p>
+          </article>
+        </section>
+      </main>
+
+      <footer>
+        <p>Made by Faqih</p>
+      </footer>
+    </div>
+
+    <script>
+      function convert() {
+        const celcius = document.getElementById("celcius").value;
+        if (celcius === "") {
+          document.getElementById("result").textContent =
+            "Harap masukkan suhu.";
+          return;
+        }
+        const fahrenheit = (celcius * 9) / 5 + 32;
+        document.getElementById(
+          "result"
+        ).textContent = `Hasil:= ${fahrenheit.toFixed(2)}°F`;
+        document.getElementById(
+          "calculation"
+        ).textContent = `Rumus: (${celcius} × 9/5) + 32 = ${fahrenheit.toFixed(
+          2
+        )}°F`;
+      }
+      function resetToZero() {
+        document.getElementById("suhuForm").reset();
+        document.getElementById("result").textContent = "";
+        document.getElementById("calculation").textContent = "";
+      }
+      function reverse() {
+        const fahrenheit = document.getElementById("celcius").value;
+        if (fahrenheit === "") {
+          document.getElementById("result").textContent =
+            "Harap masukkan suhu.";
+          return;
+        }
+        const celsius = ((fahrenheit - 32) * 5) / 9;
+        document.getElementById(
+          "result"
+        ).textContent = `Hasil: ${celsius.toFixed(2)}°C`;
+        document.getElementById(
+          "calculation"
+        ).textContent = `Rumus: (${fahrenheit} - 32) × 5/9 = ${celsius.toFixed(
+          2
+        )}°C`;
+      }
+    </script>
+  </body>
 </html>
